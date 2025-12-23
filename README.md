@@ -1,5 +1,9 @@
 This is a python project for creating fantasy calendars (output as .csv files)
 
+To use: run
+  python main.py --help 
+to see options
+
 Features include:
   - Tracking of moon phases (for up to two moons!)
   - Tracking of the solar phases (solstices and equinoxes)
