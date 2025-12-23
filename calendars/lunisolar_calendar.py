@@ -2,6 +2,7 @@ from config import SOLAR_MARKERS
 from settings import STARTING_MOON_PHASE, STARTING_SOLAR_MARKER, LUNISOLAR_MONTH_NAMES
 from astronomy.core_math import phase_crossed
 from astronomy.enums import *
+from astronomy.celestial_bodies import Moon, Sun
 
 class LunisolarState:
     def __init__(self):
@@ -10,7 +11,7 @@ class LunisolarState:
         self.day = 0
         self.awaiting_new_year = False
 
-def compute_lunisolar_state_tick(ls_state, moon, sun):
+def compute_lunisolar_state_tick(ls_state : LunisolarState, moon : Moon, sun : Sun):
     ls_state.day += 1 # tick a day
 
     inverted_dict = {value: key for key, value in SOLAR_MARKERS.items()}
@@ -32,11 +33,11 @@ def compute_lunisolar_state_tick(ls_state, moon, sun):
             ls_state.year += 1
             ls_state.awaiting_new_year = False
 
-def compute_lunisolar_calendar(row, ls_state):
+def compute_lunisolar_calendar(row : dict[str, str], ls_state : LunisolarState):
     month = ls_state.month
     month_name = LUNISOLAR_MONTH_NAMES[month]
     
-    row["Lunisolar_Year"] = ls_state.year + 1
-    row["Lunisolar_Month_#"] = month + 1
+    row["Lunisolar_Year"] = str(ls_state.year + 1)
+    row["Lunisolar_Month_#"] = str(month + 1)
     row["Lunisolar_Month"] = month_name
-    row["Lunisolar_Day"] = ls_state.day + 1
+    row["Lunisolar_Day"] = str(ls_state.day + 1)

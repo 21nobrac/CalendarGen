@@ -1,9 +1,9 @@
 from config import PHASE_NAMES
 from astronomy.core_math import phase_crossed
 from settings import MOON_NAMES
+from astronomy.celestial_bodies import Moon
 
-
-def moon_syzygy(prev_phase, curr_phase):
+def moon_syzygy(prev_phase : float, curr_phase : float):
     if phase_crossed(prev_phase, curr_phase, 0.0):
         return "New"
     if phase_crossed(prev_phase, curr_phase, 0.5):
@@ -11,7 +11,7 @@ def moon_syzygy(prev_phase, curr_phase):
     return None
 
 
-def syzygy_overlap(prev_a, curr_a, prev_b, curr_b, moon_a_name, moon_b_name):
+def syzygy_overlap(prev_a : float, curr_a : float, prev_b : float, curr_b : float, moon_a_name : str, moon_b_name : str):
     a_event = moon_syzygy(prev_a, curr_a)
     b_event = moon_syzygy(prev_b, curr_b)
 
@@ -27,25 +27,25 @@ def syzygy_overlap(prev_a, curr_a, prev_b, curr_b, moon_a_name, moon_b_name):
         return f"{moon_b_name} Full"
 
 
-def quantize_phase(p):
+def quantize_phase(p : float):
     n = len(PHASE_NAMES)
     index = int((p * n) + 0.5) % n
     return PHASE_NAMES[index]
 
 
-def compute_phases(row, moon_a, moon_b, include_raw=False, include_overlap=True):
+def compute_phases(row : dict[str, str], moon_a : Moon | None, moon_b : Moon | None, include_raw : bool = False, include_overlap : bool = True):
     if moon_a:
         ma = moon_a.phase
         prev_ma = moon_a.prev_phase
         row["MoonA_Phase_Name"] = quantize_phase(ma)
         if include_raw:
-            row["MoonA_Phase_Raw"] = round(ma, 6)
+            row["MoonA_Phase_Raw"] = str(round(ma, 6))
     if moon_b:
         mb = moon_b.phase
         prev_mb = moon_b.prev_phase
         row["MoonB_Phase_Name"] = quantize_phase(mb)
         if include_raw:
-            row["MoonB_Phase_Raw"] = round(mb, 6)
+            row["MoonB_Phase_Raw"] = str(round(mb, 6))
     if moon_a and moon_b and include_overlap:
         row["Moon_Phases_Aligned"] = syzygy_overlap(
             prev_ma, ma, # type: ignore

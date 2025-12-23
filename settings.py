@@ -28,7 +28,7 @@ MOON_NAMES = [
     "Small",
 ]
 SOLAR_MARKER_NAMES = {
-    SolarMarker.WinterSoltstice : "Winter Soltstice",
+    SolarMarker.WinterSolstice : "Winter Soltstice",
     SolarMarker.SpringEquinox : "Spring Equinox",
     SolarMarker.SummerSolstice : "Summer Solstice",
     SolarMarker.FallEquinox : "Fall Equinox"
@@ -95,7 +95,7 @@ SOLAR_MONTH_NAMES = [
 ]
 
 # --- Lunisolar calendar ---
-STARTING_SOLAR_MARKER = SolarMarker.WinterSoltstice # which solar marker the lunisolar calendar cares about
+STARTING_SOLAR_MARKER = SolarMarker.WinterSolstice # which solar marker the lunisolar calendar cares about
 STARTING_MOON_PHASE = MoonPhase.Full
 LUNISOLAR_MONTH_NAMES = [
     "Snowen",

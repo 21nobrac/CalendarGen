@@ -15,7 +15,6 @@ HEADERS = [
     "MoonB_Phase_Raw",
     "MoonB_Phase_Name",
     "Moon_Phases_Aligned",
-    "Eclipse_Event",
     "Solar_Phase_Raw",
     "Solar_Marker",
     "Solar_Year",

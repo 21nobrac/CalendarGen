@@ -1,22 +1,8 @@
-from config import PHASE_NAMES
-
-def phase(day, period):
+def phase(day : int, period : float):
     """Raw phase in [0,1)."""
     return (day / period) % 1.0
 
-def node_distance(p):
-    """
-    Angular distance from nearest node.
-    0.0 or 0.5 are nodes.
-    Returns normalized distance [0, 0.25].
-    """
-    return min(
-        abs(p),
-        abs(p - 0.5),
-        abs(p - 1.0)
-    )
-
-def phase_crossed(prev, curr, target):
+def phase_crossed(prev : float, curr : float, target : float):
     """
     Returns True if phase crosses target between prev and curr.
     Handles wraparound correctly.

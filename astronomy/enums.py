@@ -5,7 +5,7 @@ class MoonPhase(Enum):
     New = 1
 
 class SolarMarker(Enum):
-    WinterSoltstice = 0
+    WinterSolstice = 0
     SpringEquinox = 1
     SummerSolstice = 2
     FallEquinox = 3
