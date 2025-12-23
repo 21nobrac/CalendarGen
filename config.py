@@ -1,21 +1,10 @@
-from astronomy.enums import *
-
-# --- Phase naming ---
-PHASE_NAMES = [
-    "New",
-    "Waxing Crescent",
-    "First Quarter",
-    "Waxing Gibbous",
-    "Full",
-    "Waning Gibbous",
-    "Last Quarter",
-    "Waning Crescent"
-]
-
-# --- Solar markers (fraction of year) ---
-SOLAR_MARKERS = {
-    0.00: SolarMarker.WinterSolstice,
-    0.25: SolarMarker.SpringEquinox,
-    0.50: SolarMarker.SummerSolstice,
-    0.75: SolarMarker.FallEquinox
-}
+INCLUDE_FIRST_MOON : bool = True
+INCLUDE_SECOND_MOON : bool = True
+INCLUDE_DOUBLE_SYZYGIES : bool = True
+INCLUDE_SOLAR_CALENDAR : bool = True
+INCLUDE_LUNISOLAR_CALENDAR : bool = True
+INCLUDE_LUNAR_CALENDAR_A : bool = True
+INCLUDE_LUNAR_CALENDAR_B : bool = True
+INCLUDE_RAW_PHASE_FIGURES : bool = True
+INCLUDE_SOLAR_PHASES : bool = True
+INCLUDE_LUNAR_PHASES : bool = True

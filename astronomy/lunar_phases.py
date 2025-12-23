@@ -1,7 +1,7 @@
-from config import PHASE_NAMES
+from astronomy.enums import MoonPhase
 from astronomy.core_math import phase_crossed
-from settings import MOON_NAMES
 from astronomy.celestial_bodies import Moon
+from localization import MOON_PHASE_NAMES, MOON_NAMES
 
 def moon_syzygy(prev_phase : float, curr_phase : float):
     if phase_crossed(prev_phase, curr_phase, 0.0):
@@ -28,9 +28,10 @@ def syzygy_overlap(prev_a : float, curr_a : float, prev_b : float, curr_b : floa
 
 
 def quantize_phase(p : float):
-    n = len(PHASE_NAMES)
+    n = len(MoonPhase)
     index = int((p * n) + 0.5) % n
-    return PHASE_NAMES[index]
+    phase = MoonPhase(index)
+    return MOON_PHASE_NAMES[phase]
 
 
 def compute_phases(row : dict[str, str], moon_a : Moon | None, moon_b : Moon | None, include_raw : bool = False, include_overlap : bool = True):

@@ -1,5 +1,5 @@
-from config import SOLAR_MARKERS as SM
-from settings import SOLAR_MARKER_NAMES as SMN
+from constants import SOLAR_MARKERS as SM
+from localization import SOLAR_MARKER_NAMES as SMN
 from astronomy.core_math import phase_crossed
 from astronomy.celestial_bodies import Sun
 

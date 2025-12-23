@@ -1,4 +1,5 @@
-from settings import SOLAR_CIVIL_YEAR as YEAR, SOLAR_MONTH_LENGTHS as MONTH_LENGTHS, SOLAR_MONTH_NAMES as MONTH_NAMES, SOLAR_CALENDAR_OFFSET as OFFSET
+from settings import SOLAR_CIVIL_YEAR as YEAR, SOLAR_MONTH_LENGTHS as MONTH_LENGTHS, SOLAR_CALENDAR_OFFSET as OFFSET
+from localization import SOLAR_MONTH_NAMES as MONTH_NAMES
 
 def find_month_and_day(year_day: int):
     consumed_days = 0

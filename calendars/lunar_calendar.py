@@ -1,4 +1,4 @@
-from settings import LUNAR_A_MONTHS_NAMES, LUNAR_B_MONTHS_NAMES
+from localization import LUNAR_A_MONTHS_NAMES, LUNAR_B_MONTHS_NAMES
 from astronomy.core_math import phase_crossed
 from astronomy.celestial_bodies import Moon
 

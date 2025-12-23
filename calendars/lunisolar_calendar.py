@@ -1,5 +1,6 @@
-from config import SOLAR_MARKERS
-from settings import STARTING_MOON_PHASE, STARTING_SOLAR_MARKER, LUNISOLAR_MONTH_NAMES
+from constants import SOLAR_MARKERS
+from settings import STARTING_MOON_PHASE, STARTING_SOLAR_MARKER
+from localization import LUNISOLAR_MONTH_NAMES
 from astronomy.core_math import phase_crossed
 from astronomy.enums import *
 from astronomy.celestial_bodies import Moon, Sun
