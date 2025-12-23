@@ -7,9 +7,12 @@ from astronomy.lunar_phases import compute_phases as compute_lunar_phases
 from astronomy.solar_phases import compute_phases as compute_solar_phases
 from calendars.solar_calendar import compute_solar_calendar
 from calendars.lunisolar_calendar import compute_lunisolar_state_tick as tick_ls_state, LunisolarState, compute_lunisolar_calendar
+from user_defined_events import compute_user_defined_events as compute_events
+from calendars.date import Date
 
 HEADERS = [
     "Day",
+    "User_Defined_Events",
     "MoonA_Phase_Raw",
     "MoonA_Phase_Name",
     "MoonB_Phase_Raw",
@@ -120,21 +123,28 @@ def main():
                     
             # --- update lunisolar state ---
             if ls_state and moon_a:
-                tick_ls_state(ls_state, moon_a, sun)                    
+                tick_ls_state(ls_state, moon_a, sun)
+
+            dates : list[Date] = []
 
             # --- build row ---
             row = {"Day": str(day)}
-            
             if config.INCLUDE_LUNAR_PHASES:
                 compute_lunar_phases(row, moon_a, moon_b, config.INCLUDE_RAW_PHASE_FIGURES)
             if config.INCLUDE_SOLAR_PHASES:
                 compute_solar_phases(row, sun, config.INCLUDE_RAW_PHASE_FIGURES)
             if config.INCLUDE_SOLAR_CALENDAR:
-                compute_solar_calendar(row, day)
+                solar_date = compute_solar_calendar(row, day)
+                dates.append(solar_date) if solar_date else None
             if ls_state: 
-                compute_lunisolar_calendar(row, ls_state)
+                Lunisolar_date = compute_lunisolar_calendar(row, ls_state)
+                dates.append(Lunisolar_date) if Lunisolar_date else None
             if lc_state_a or lc_state_b:
-                compute_lunar_calendars(row, lc_state_a, lc_state_b)
+                lunar_date_a, lunar_date_b = compute_lunar_calendars(row, lc_state_a, lc_state_b)
+                dates.append(lunar_date_a) if lunar_date_a else None
+                dates.append(lunar_date_b) if lunar_date_b else None
+            if config.INCLUDE_USER_DEFINED_EVENTS:
+                compute_events(row, dates)
 
             writer.writerow([row.get(h, "") for h in HEADERS])
 

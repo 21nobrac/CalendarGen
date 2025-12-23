@@ -1,5 +1,7 @@
 from settings import SOLAR_CIVIL_YEAR as YEAR, SOLAR_MONTH_LENGTHS as MONTH_LENGTHS, SOLAR_CALENDAR_OFFSET as OFFSET
 from localization import SOLAR_MONTH_NAMES as MONTH_NAMES
+from calendars.date import Date
+from calendars.enums import Calendar
 
 def find_month_and_day(year_day: int):
     consumed_days = 0
@@ -18,8 +20,13 @@ def compute_solar_calendar(row: dict[str, str], day: int):
     yd = day - (YEAR * year)
     mi, month_day = find_month_and_day(yd)
     month = mi + 1 if mi is not None else None
-    month_name = MONTH_NAMES[mi] if mi and mi < len(MONTH_NAMES) else None
-    row["Solar_Year"] = str(year)
-    row["Solar_Month_#"] = str(month)
+    month_name = MONTH_NAMES[mi] if mi is not None and mi < len(MONTH_NAMES) else None
+    row["Solar_Year"] = str(year + 1)
+    if month is not None:
+        row["Solar_Month_#"] = str(month)
     row["Solar_Month"] = str(month_name)
-    row["Solar_Day"] = str(month_day)
+    if month_day is not None:
+        row["Solar_Day"] = str(month_day + 1)
+
+    if month is not None and month_day is not None:
+        return Date(Calendar.Solar, year + 1, month, month_day + 1)

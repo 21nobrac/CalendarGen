@@ -2,8 +2,10 @@ from constants import SOLAR_MARKERS
 from settings import STARTING_MOON_PHASE, STARTING_SOLAR_MARKER
 from localization import LUNISOLAR_MONTH_NAMES
 from astronomy.core_math import phase_crossed
-from astronomy.enums import *
+from astronomy.enums import SyzygyType
 from astronomy.celestial_bodies import Moon, Sun
+from calendars.date import Date
+from calendars.enums import Calendar
 
 class LunisolarState:
     def __init__(self):
@@ -23,9 +25,9 @@ def compute_lunisolar_state_tick(ls_state : LunisolarState, moon : Moon, sun : S
     
     mp = None
     if phase_crossed(moon.prev_phase, moon.phase, 0.5):
-        mp = MoonPhase.Full
+        mp = SyzygyType.Full
     elif phase_crossed(moon.prev_phase, moon.phase, 0):
-        mp = MoonPhase.New
+        mp = SyzygyType.New
     if mp == STARTING_MOON_PHASE: # if at the start of a month, tick months and reset days
         ls_state.month += 1
         ls_state.day = 0
@@ -42,3 +44,5 @@ def compute_lunisolar_calendar(row : dict[str, str], ls_state : LunisolarState):
     row["Lunisolar_Month_#"] = str(month + 1)
     row["Lunisolar_Month"] = month_name
     row["Lunisolar_Day"] = str(ls_state.day + 1)
+
+    return Date(Calendar.Lunisolar, ls_state.year + 1, month + 1, ls_state.day + 1)

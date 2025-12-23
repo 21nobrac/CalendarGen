@@ -1,6 +1,8 @@
 from localization import LUNAR_A_MONTHS_NAMES, LUNAR_B_MONTHS_NAMES
 from astronomy.core_math import phase_crossed
 from astronomy.celestial_bodies import Moon
+from calendars.date import Date
+from calendars.enums import Calendar
 
 class LunarCalendarState:
     def __init__(self, month_num : int = 12, start_day : int = 0):
@@ -25,6 +27,7 @@ class LunarCalendarState:
             self.year += 1
 
 def compute_lunar_calendars(row : dict[str, str], lc_state_a : LunarCalendarState | None, lc_state_b : LunarCalendarState | None):
+    dateA = None
     if lc_state_a and lc_state_a.started:
         month = lc_state_a.month
         month_name = LUNAR_A_MONTHS_NAMES[month]
@@ -33,7 +36,10 @@ def compute_lunar_calendars(row : dict[str, str], lc_state_a : LunarCalendarStat
         row["LunarA_Month_#"] = str(month + 1)
         row["LunarA_Month"] = month_name
         row["LunarA_Day"] = str(lc_state_a.day + 1)
+
+        dateA = Date(Calendar.LunarA, lc_state_a.year + 1, month + 1, lc_state_a.day + 1)
     
+    dateB = None
     if lc_state_b and lc_state_b.started:
         month = lc_state_b.month
         month_name = LUNAR_B_MONTHS_NAMES[month]
@@ -42,3 +48,9 @@ def compute_lunar_calendars(row : dict[str, str], lc_state_a : LunarCalendarStat
         row["LunarB_Month_#"] = str(month + 1)
         row["LunarB_Month"] = month_name
         row["LunarB_Day"] = str(lc_state_b.day + 1)
+
+        dateB = Date(Calendar.LunarB, lc_state_b.year + 1, month + 1, lc_state_b.day + 1)
+
+    return dateA, dateB
+
+    
