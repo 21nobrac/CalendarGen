@@ -133,7 +133,8 @@ def main():
                 compute_solar_calendar(row, day)
             if ls_state: 
                 compute_lunisolar_calendar(row, ls_state)
-            compute_lunar_calendars(row, lc_state_a, lc_state_b)
+            if lc_state_a or lc_state_b:
+                compute_lunar_calendars(row, lc_state_a, lc_state_b)
 
             writer.writerow([row.get(h, "") for h in HEADERS])
 

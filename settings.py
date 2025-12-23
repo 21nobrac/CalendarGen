@@ -28,7 +28,7 @@ MOON_NAMES = [
     "Small",
 ]
 SOLAR_MARKER_NAMES = {
-    SolarMarker.WinterSolstice : "Winter Soltstice",
+    SolarMarker.WinterSolstice : "Winter Solstice",
     SolarMarker.SpringEquinox : "Spring Equinox",
     SolarMarker.SummerSolstice : "Summer Solstice",
     SolarMarker.FallEquinox : "Fall Equinox"

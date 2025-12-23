@@ -34,6 +34,10 @@ def quantize_phase(p : float):
 
 
 def compute_phases(row : dict[str, str], moon_a : Moon | None, moon_b : Moon | None, include_raw : bool = False, include_overlap : bool = True):
+    ma = None
+    prev_ma = None
+    mb = None
+    prev_mb = None
     if moon_a:
         ma = moon_a.phase
         prev_ma = moon_a.prev_phase
@@ -46,10 +50,10 @@ def compute_phases(row : dict[str, str], moon_a : Moon | None, moon_b : Moon | N
         row["MoonB_Phase_Name"] = quantize_phase(mb)
         if include_raw:
             row["MoonB_Phase_Raw"] = str(round(mb, 6))
-    if moon_a and moon_b and include_overlap:
+    if ma and prev_ma and mb and prev_mb and include_overlap:
         row["Moon_Phases_Aligned"] = syzygy_overlap(
-            prev_ma, ma, # type: ignore
-            prev_mb, mb, # type: ignore
+            prev_ma, ma,
+            prev_mb, mb,
             MOON_NAMES[0],
             MOON_NAMES[1]
         )
