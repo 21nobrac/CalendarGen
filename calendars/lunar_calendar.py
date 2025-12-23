@@ -1,4 +1,4 @@
-from config import LUNAR_A_MONTHS_NAMES, LUNAR_B_MONTHS_NAMES, LUNAR_B_DAY_START, LUNAR_A_DAY_START
+from settings import LUNAR_A_MONTHS_NAMES, LUNAR_B_MONTHS_NAMES
 from astronomy.core_math import phase_crossed
 
 class LunarCalendarState:
@@ -24,7 +24,7 @@ class LunarCalendarState:
             self.year += 1
 
 def compute_lunar_calendars(row, lc_state_a, lc_state_b):
-    if lc_state_a.started:
+    if lc_state_a and lc_state_a.started:
         month = lc_state_a.month
         month_name = LUNAR_A_MONTHS_NAMES[month]
         
@@ -33,7 +33,7 @@ def compute_lunar_calendars(row, lc_state_a, lc_state_b):
         row["LunarA_Month"] = month_name
         row["LunarA_Day"] = lc_state_a.day + 1
     
-    if lc_state_b.started:
+    if lc_state_b and lc_state_b.started:
         month = lc_state_b.month
         month_name = LUNAR_B_MONTHS_NAMES[month]
         

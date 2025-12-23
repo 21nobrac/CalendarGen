@@ -1,4 +1,5 @@
-from config import MOON_A_MONTH, STARTING_MOON_PHASE, STARTING_SOLAR_MARKER, SOLAR_MARKERS, LUNISOLAR_MONTH_NAMES
+from config import SOLAR_MARKERS
+from settings import STARTING_MOON_PHASE, STARTING_SOLAR_MARKER, LUNISOLAR_MONTH_NAMES
 from astronomy.core_math import phase_crossed
 from astronomy.enums import *
 
